@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_facebook_responsive_ui/config/palette.dart';
-import 'package:flutter_facebook_responsive_ui/models/user_model.dart';
+import 'package:flutter_facebook_responsive_ui/data/data.dart';
+import 'package:flutter_facebook_responsive_ui/models/models.dart';
 import 'package:flutter_facebook_responsive_ui/widgets/widgets.dart';
 import 'package:material_design_icons_flutter/material_design_icons_flutter.dart';
 
 class HomeScreen extends StatelessWidget {
-  final User currentUser = User(
-    name: 'Marcus Ng',
-    imageUrl:
-        'https://images.unsplash.com/photo-1578133671540-edad0b3d689e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1351&q=80',
-  );
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,17 +29,42 @@ class HomeScreen extends StatelessWidget {
               CircleButton(
                 icon: Icons.search,
                 iconSize: 30.0,
-                onPressed: () => print('search'),
+                onPressed: () => print('Search'),
               ),
               CircleButton(
                 icon: MdiIcons.facebookMessenger,
                 iconSize: 30.0,
                 onPressed: () => print('Messenger'),
-              )
+              ),
             ],
           ),
           SliverToBoxAdapter(
-              child: CreatePostContainer(currentUser: currentUser)),
+            child: CreatePostContainer(currentUser: currentUser),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(0.0, 10.0, 0.0, 5.0),
+            sliver: SliverToBoxAdapter(
+              child: Rooms(onlineUsers: onlineUsers),
+            ),
+          ),
+          SliverPadding(
+            padding: const EdgeInsets.fromLTRB(0.0, 5.0, 0.0, 5.0),
+            sliver: SliverToBoxAdapter(
+              child: Stories(
+                currentUser: currentUser,
+                stories: stories,
+              ),
+            ),
+          ),
+          // SliverList(
+          //   delegate: SliverChildBuilderDelegate(
+          //         (context, index) {
+          //       final Post post = posts[index];
+          //       return PostContainer(post: post);
+          //     },
+          //     childCount: posts.length,
+          //   ),
+          // ),
         ],
       ),
     );
