@@ -56,15 +56,15 @@ class HomeScreen extends StatelessWidget {
               ),
             ),
           ),
-          // SliverList(
-          //   delegate: SliverChildBuilderDelegate(
-          //         (context, index) {
-          //       final Post post = posts[index];
-          //       return PostContainer(post: post);
-          //     },
-          //     childCount: posts.length,
-          //   ),
-          // ),
+          SliverList(
+            delegate: SliverChildBuilderDelegate(
+              (context, index) {
+                final Post post = posts[index];
+                return PostContainer(post: post);
+              },
+              childCount: posts.length,
+            ),
+          ),
         ],
       ),
     );
